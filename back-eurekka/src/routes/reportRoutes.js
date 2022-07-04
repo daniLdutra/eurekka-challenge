@@ -1,6 +1,6 @@
 const { Router } = require('express');
 const report = require('../model/Report');
-const { body, validationResult } = require('express-validator');
+const { body, validationResult, param } = require('express-validator');
 
 const reportRoutes = Router();
 
@@ -24,6 +24,20 @@ reportRoutes.post('/', createReportValidation, async (req, res) => {
 
   const created = await report.create(req.body);
   return res.status(201).json(created);
+});
+
+reportRoutes.get('/:id', param('id').isMongoId(), async (req, res) => {
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    return res.status(400).json({ errors: errors.array() });
+  }
+
+  try {
+    const findReport = await report.findById(req.params.id);
+    return res.status(200).json(findReport);
+  } catch (error) {
+    return res.status(400).json({ error: 'Report not found' });
+  }
 });
 
 module.exports = { reportRoutes };
