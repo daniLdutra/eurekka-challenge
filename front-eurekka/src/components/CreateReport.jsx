@@ -43,7 +43,7 @@ export const CreateReport = () => {
                 value={values.veterinary}
                 name="veterinary"
                 onChange={handleChange}
-                type="veterinary"
+                type="text"
               />
             </Form.Group>
 
@@ -53,7 +53,7 @@ export const CreateReport = () => {
                 value={values.guardian}
                 name="guardian"
                 onChange={handleChange}
-                type="guardian"
+                type="text"
               />
             </Form.Group>
 
@@ -63,7 +63,7 @@ export const CreateReport = () => {
                 value={values.pacient}
                 name="pacient"
                 onChange={handleChange}
-                type="pacient"
+                type="text"
               />
             </Form.Group>
 
@@ -73,7 +73,7 @@ export const CreateReport = () => {
                 value={values.specie}
                 name="specie"
                 onChange={handleChange}
-                type="specie"
+                type="text"
               />
             </Form.Group>
 
@@ -83,7 +83,7 @@ export const CreateReport = () => {
                 value={values.breed}
                 name="breed"
                 onChange={handleChange}
-                type="breed"
+                type="text"
               />
             </Form.Group>
 
@@ -106,7 +106,7 @@ export const CreateReport = () => {
                 value={values.age}
                 name="age"
                 onChange={handleChange}
-                type="age"
+                type="number"
               />
             </Form.Group>
 
@@ -116,7 +116,7 @@ export const CreateReport = () => {
                 value={values.region}
                 name="region"
                 onChange={handleChange}
-                type="region"
+                type="text"
               />
             </Form.Group>
 
