@@ -1,16 +1,33 @@
 import axios from 'axios';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Form, Button, Container, Alert } from 'react-bootstrap';
 
 export const CreateReport = () => {
-  const [values, setValues] = useState({});
+  const inicialState = {
+    veterinary: '',
+    guardian: '',
+    pacient: '',
+    specie: 'felino',
+    breed: '',
+    sex: '',
+    age: '',
+    region: '',
+    report: '',
+  };
+  
+  const [values, setValues] = useState(inicialState);
   const [reportCreated, setReportCreated] = useState(false);
+  const [breedsCat, setBreedsCat] = useState([]);
+  const [selectedBreed, setSelectedBreed] = useState('');
 
   const handleChange = (e) => {
     const newValues = values;
 
     newValues[e.target.name] = e.target.value;
-    setValues(newValues);
+
+    if (e.target.name === 'breed') setSelectedBreed(e.target.value);
+
+    setValues({ ...newValues });
   };
 
   const handleSubmit = async (e) => {
@@ -23,6 +40,25 @@ export const CreateReport = () => {
       console.log(error);
     }
   };
+
+  useEffect(() => {
+    const apiCat = 'https://api.thecatapi.com/v1/breeds';
+
+    axios
+      .get(apiCat)
+      .then(({ data: cats }) => {
+        const breeds = [];
+
+        cats.map((cat) => {
+          breeds.push(cat.name);
+        });
+
+        setBreedsCat(breeds);
+      })
+      .catch((err) => {
+        console.log(`Search error ${err}`);
+      });
+  }, []);
 
   return (
     <div className="mt-3 mb-5">
@@ -70,21 +106,26 @@ export const CreateReport = () => {
             <Form.Group className="mb-3">
               <Form.Label>Espécie</Form.Label>
               <Form.Control
+                disabled
                 value={values.specie}
-                name="specie"
                 onChange={handleChange}
+                name="specie"
                 type="text"
               />
             </Form.Group>
 
             <Form.Group className="mb-3">
               <Form.Label>Raça</Form.Label>
-              <Form.Control
-                value={values.breed}
+              <Form.Select
                 name="breed"
-                onChange={handleChange}
                 type="text"
-              />
+                value={selectedBreed}
+                onChange={handleChange}
+              >
+                {breedsCat.map((breed) => (
+                  <option key={breed}>{breed}</option>
+                ))}
+              </Form.Select>
             </Form.Group>
 
             <Form.Group className="mb-3">
@@ -106,7 +147,7 @@ export const CreateReport = () => {
                 value={values.age}
                 name="age"
                 onChange={handleChange}
-                type="number"
+                type="text"
               />
             </Form.Group>
 

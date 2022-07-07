@@ -48,7 +48,7 @@ export const ViewReport = () => {
             <Card.Body>
               <blockquote className="blockquote mb-0">
                 <p>Região:{values.region}</p>
-                <text>Achados Radiográficos: {values.report}</text>
+                <p>Achados Radiográficos:</p> <text>{values.report}</text>
                 <footer className="blockquote-footer">
                   <p>Laudado por: Dra. Rosimeire Alves</p>
                 </footer>
