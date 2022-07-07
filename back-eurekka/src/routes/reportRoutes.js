@@ -11,7 +11,7 @@ const createReportValidation = [
   body('specie').isLength({ min: 2, max: 10 }),
   body('breed').isLength({ min: 2, max: 20 }),
   body('sex').isLength({ min: 1, max: 1 }),
-  body('age').isNumeric({ no_symbols: true }),
+  body('age').isLength({ min: 1, max: 20 }),
   body('region').isLength({ min: 2, max: 20 }),
   body('report').isLength({ min: 5, max: 255 }),
 ];
