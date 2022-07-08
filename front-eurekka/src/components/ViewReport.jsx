@@ -12,7 +12,6 @@ export const ViewReport = () => {
     axios
       .get(`http://localhost:3001/report/${reportId}`)
       .then(({ data }) => {
-        // console.log(data);
         setValues(data);
       })
       .catch((err) => {
