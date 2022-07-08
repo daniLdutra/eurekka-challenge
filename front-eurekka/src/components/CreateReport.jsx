@@ -18,14 +18,11 @@ export const CreateReport = () => {
   const [values, setValues] = useState(inicialState);
   const [reportCreated, setReportCreated] = useState(false);
   const [breedsCat, setBreedsCat] = useState([]);
-  const [selectedBreed, setSelectedBreed] = useState('');
 
   const handleChange = (e) => {
     const newValues = values;
 
     newValues[e.target.name] = e.target.value;
-
-    if (e.target.name === 'breed') setSelectedBreed(e.target.value);
 
     setValues({ ...newValues });
   };
@@ -119,7 +116,7 @@ export const CreateReport = () => {
               <Form.Select
                 name="breed"
                 type="text"
-                value={selectedBreed}
+                value={values.breed}
                 onChange={handleChange}
               >
                 {breedsCat.map((breed) => (
