@@ -1,6 +1,7 @@
 const { Router } = require('express');
 const report = require('../model/Report');
 const { body, validationResult, param } = require('express-validator');
+const { upload } = require('../middlewares/upload');
 
 const reportRoutes = Router();
 
@@ -16,15 +17,29 @@ const createReportValidation = [
   body('report').isLength({ min: 5, max: 255 }),
 ];
 
-reportRoutes.post('/', createReportValidation, async (req, res) => {
-  const errors = validationResult(req);
-  if (!errors.isEmpty()) {
-    return res.status(400).json({ errors: errors.array() });
-  }
+reportRoutes.post(
+  '/',
+  upload.single('file'),
+  createReportValidation,
+  async (req, res) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).json({ errors: errors.array() });
+    }
 
-  const created = await report.create(req.body);
-  return res.status(201).json(created);
-});
+    if (!req.file) {
+      return res.status(400).json({ error: 'Please send an image file' });
+    }
+
+    const obj = {
+      ...req.body,
+      imgRx: req.file.filename,
+    };
+
+    const created = await report.create(obj);
+    return res.status(201).json(created);
+  }
+);
 
 reportRoutes.get('/:id', param('id').isMongoId(), async (req, res) => {
   const errors = validationResult(req);

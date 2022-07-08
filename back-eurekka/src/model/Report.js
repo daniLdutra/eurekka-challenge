@@ -37,6 +37,10 @@ const ReportSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
+    imgRx: {
+      type: String,
+      required: true,
+    },
   },
   {
     timestamps: true,

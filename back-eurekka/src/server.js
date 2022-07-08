@@ -9,11 +9,10 @@ app.use(express.json());
 
 app.use(cors({ origin: 'http://localhost:3000' }));
 
-const PORT = process.env.PORT || 3001;
+// ao acessar a rota "/images", acessa a pasta "src/assets" no back
+app.use('/images', express.static('src/assets'));
 
-app.get('/', (_req, res) => {
-  return res.send('Hello World!');
-});
+const PORT = process.env.PORT || 3001;
 
 app.use('/report', reportRoutes);
 
