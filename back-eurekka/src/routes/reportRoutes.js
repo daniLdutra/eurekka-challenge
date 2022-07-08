@@ -22,6 +22,7 @@ reportRoutes.post(
   upload.single('file'),
   createReportValidation,
   async (req, res) => {
+    // validações do express-validator
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
       return res.status(400).json({ errors: errors.array() });
@@ -41,6 +42,7 @@ reportRoutes.post(
 );
 
 reportRoutes.get('/:id', param('id').isMongoId(), async (req, res) => {
+  // validações do express-validator
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
     return res.status(400).json({ errors: errors.array() });
