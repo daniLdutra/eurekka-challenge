@@ -27,14 +27,13 @@ reportRoutes.post(
       return res.status(400).json({ errors: errors.array() });
     }
 
-    if (!req.file) {
-      return res.status(400).json({ error: 'Please send an image file' });
-    }
-
     const obj = {
       ...req.body,
-      imgRx: req.file.filename,
     };
+
+    if (req.file) {
+      obj.imgRx = req.file.filename;
+    }
 
     const created = await report.create(obj);
     return res.status(201).json(created);

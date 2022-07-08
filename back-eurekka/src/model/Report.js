@@ -39,7 +39,6 @@ const ReportSchema = new mongoose.Schema(
     },
     imgRx: {
       type: String,
-      required: true,
     },
   },
   {
