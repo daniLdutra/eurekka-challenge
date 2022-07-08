@@ -48,7 +48,15 @@ export const ViewReport = () => {
             <Card.Body>
               <blockquote className="blockquote mb-0">
                 <p>Região:{values.region}</p>
-                <p>Achados Radiográficos:</p> <text>{values.report}</text>
+                <p>Achados Radiográficos:</p>
+                <p>{values.report}</p>
+                {/* exibir a <img /> apenas quando vier do back */}
+                {values.imgRx && (
+                  <img
+                    width={600}
+                    src={`http://localhost:3001/images/${values.imgRx}`}
+                  />
+                )}
                 <footer className="blockquote-footer">
                   <p>Laudado por: Dra. Rosimeire Alves</p>
                 </footer>

@@ -14,7 +14,7 @@ export const CreateReport = () => {
     region: '',
     report: '',
   };
-  
+
   const [values, setValues] = useState(inicialState);
   const [reportCreated, setReportCreated] = useState(false);
   const [breedsCat, setBreedsCat] = useState([]);
@@ -35,7 +35,7 @@ export const CreateReport = () => {
     try {
       await axios.post('http://localhost:3001/report', values);
       setReportCreated(true);
-      setValues('');
+      setValues(inicialState);
     } catch (error) {
       console.log(error);
     }
